@@ -21,23 +21,50 @@ In Rosalind's implementation, a string in FASTA format will be labeled by the ID
 Given: At most 10 DNA strings in FASTA format (of length at most 1 kbp each).
 
 Return: The ID of the string having the highest GC-content, followed by the GC-content of that string. Rosalind allows for a default error of 0.001 in all decimal answers unless otherwise stated; please see the note on absolute error below.
+
+Note on Absolute Error
+We say that a number x
+ is within an absolute error of y
+ to a correct solution if x
+ is within y
+ of the correct solution. For example, if an exact solution is 6.157892, then for x
+ to be within an absolute error of 0.001, we must have that |x−6.157892|<0.001
+, or 6.156892<x<6.158892
+.
+
+Error bounding is a vital practical tool because of the inherent round-off error in representing decimals in a computer, where only a finite number of decimal places are allotted to any number. After being compounded over a number of operations, this round-off error can become evident. As a result, rather than testing whether two numbers are equal with x=z
+, you may wish to simply verify that |x−z|
+ is very small.
+
+The mathematical field of numerical analysis is devoted to rigorously studying the nature of computational approximation.
+
+Sample Dataset
+>Rosalind_6404
+CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCC
+TCCCACTAATAATTCTGAGG
+>Rosalind_5959
+CCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCT
+ATATCCATTTGTCAGCAGACACGC
+>Rosalind_0808
+CCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGAC
+TGGGAACCTGCGGGCAGTAGGTGGAAT
+
+Sample Output
+Rosalind_0808
+60.919540
 '''
+from Bio import SeqIO
 
-cache = {0: 0, 1: 1}
-def fib_seq(n, k):
-    if n in cache: # Base case
-        return cache[n]
-    # Compute and cache the Fib number
-    cache[n] = fib_seq(n-1, k) + (k * fib_seq(n-2, k))
-    return cache[n]
+seq_object = SeqIO.parse("rosalind_gc.fasta", "fasta")
+max_gc_content = 0
+max_sequence_id = None
+for seq in seq_object:
+    str_seq = str(seq.seq)
+    seq_id = seq.id
+    gc_content = (str_seq.count("C") + str_seq.count("G")) / len(str_seq) * 100
+    if gc_content > max_gc_content:
+        max_gc_content = gc_content
+        max_sequence_id = seq_id
 
-f = open("rosalind_fib.txt")
-l = f.read()
-
-l = l.strip().split(' ')
-l = [int(x) for x in l]
-
-n = l[0]
-k = l[1]
-
-print(fib_seq(n, k))
+print(max_sequence_id)
+print(max_gc_content)
