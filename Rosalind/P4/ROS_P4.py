@@ -1,7 +1,8 @@
 '''
 ROSALIND
-Wascally Wabbits
+Rabbits and Recurrence Relations
 
+Wascally Wabbits
 In 1202, Leonardo of Pisa (commonly known as Fibonacci) considered a mathematical exercise regarding the reproduction of a population of rabbits. He made the following simplifying assumptions about the population:
 
 The population begins in the first month with a pair of newborn rabbits.
