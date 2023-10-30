@@ -10,3 +10,4 @@ Number          Description
 3               nucleobase strings (codons) to translate into amino acids
 4^3             or 64 possible codons
 2               types of special codons: start (AUG) and stop (UAA, UAG UGA)
+10.7%           Percentage of Alu repeats (300bp long in million times) in human bp genome
