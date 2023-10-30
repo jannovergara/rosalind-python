@@ -1,0 +1,12 @@
+Number          Description
+4               Nucleobases: A adenine, C cytosine, G guanine and T thymine
+3.2 billion     BP base pairs in a human genome
+50%             GC content of most eukaryotic genomes
+>>50%           GC content of most prokaryotes
+20              Amino acids common in human
+9               Essential amino acids
+1951-1953       Year James Watson and Francis Crick discovered double-helix of DNA from high-res X-ray image of Rosalind Franklin and Raymond Gosling
+4               RNA bases to translate to 20 amino acids
+3               nucleobase strings (codons) to translate into amino acids
+4^3             or 64 possible codons
+2               types of special codons: start (AUG) and stop (UAA, UAG UGA)
