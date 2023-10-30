@@ -36,14 +36,47 @@ Sample Output
 
 Hint
 Consider simulating inheritance on a number of small test cases in order to check your solution.
+
+k = homozygous dominant (AA)
+m = heterozygous (Aa)
+n = homozygous recessive (aa)
 '''
 
-fh = open('rosalind_hamm.txt')
-seq_list = [line.rstrip() for line in fh.readlines()]
+def MendelProb(k, m, n):
+    total = k + m + n
+    denom_k_1 = ((k-1) + m + n)
+    denom_m_1 = (k + (m-1) + n)
+    denom_n_1 = (k + m + (n-1))
+
+    factor_k = (k / total)
+    factor_m = (m / total)
+    factor_n = (n / total)
+
+    outcome_AA_AA = factor_k * ((k-1) / (denom_k_1)) * 1
+    outcome_AA_Aa = factor_k * (m / (denom_k_1)) * 1
+    outcome_AA_aa = factor_k * (n / (denom_k_1)) * 1
+
+    outcome_Aa_AA = factor_m * (k / (denom_m_1)) * 1
+    outcome_Aa_Aa = factor_m * ((m-1) / (denom_m_1)) * 0.75
+    outcome_Aa_aa = factor_m * (n / (denom_m_1)) * 0.5
+
+    outcome_aa_AA = factor_n * (k / (denom_n_1)) * 1
+    outcome_aa_Aa = factor_n * (m / (denom_n_1)) * 0.5
+
+    dominant = outcome_AA_AA + outcome_AA_Aa + outcome_AA_aa + outcome_Aa_AA + outcome_Aa_Aa + outcome_Aa_aa + outcome_aa_AA + outcome_aa_Aa
+
+    return dominant
+
+fh = open('rosalind_iprb.txt')
+l = fh.read()
+
+l = l.strip().split(' ')
+l = [int(x) for x in l]
+
+k = l[0]
+m = l[1]
+n = l[2]
+# print(k, m, n)
+
 fh.close()
-print(seq_list)
-
-# Calculate hamming distance
-ham_dist = sum(1 for a, b in zip(seq_list[0], seq_list[1]) if a != b) + abs(len(seq_list[0]) - len(seq_list[1]))
-
-print(ham_dist)
+print(MendelProb(k, m, n))
